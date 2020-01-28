@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import ContactService from '../service/ContactService';
+import ContactService from '../../service/ContactService';
 
 export default class ContactDetails extends Component {
 

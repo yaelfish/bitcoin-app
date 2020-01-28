@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ContactService from '../service/ContactService';
-import ContactList from '../cmps/ContactList';
-import ContactFilter from '../cmps/ContactFilter';
+import ContactService from '../../service/ContactService';
+import ContactList from '../../cmps/Contact/ContactList';
+import ContactFilter from '../../cmps/Contact/ContactFilter';
 
 export default class ContactPage extends Component {
 
@@ -28,11 +28,11 @@ export default class ContactPage extends Component {
 
     render() {
         return (
-            <div>
+            <main className="container">
                 <h1>CONTACTS</h1>
                 <ContactFilter onFilter={this.onFilter} />
                 <ContactList contacts={this.state.contacts} />
-            </div>
+            </main>
         )
     }
 }

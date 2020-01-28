@@ -1,10 +1,10 @@
 import React from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import ContactPage from './views/ContactPage';
-import ContactDetails from './views/ContactDetails';
-import ContactEdit from './views/ContactEdit';
-import ContactAdd from './views/ContactAdd';
+import ContactPage from './views/Contact/ContactPage';
+import ContactDetails from './views/Contact/ContactDetails';
+import ContactEdit from './views/Contact/ContactEdit';
+import ContactAdd from './views/Contact/ContactAdd';
 import HomePage from './views/HomePage';
 import Footer from './cmps/Footer';
 import NavBar from './cmps/NavBar';

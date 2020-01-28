@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ContactForm from '../cmps/ContactForm'
-import ContactService from '../service/ContactService'
+import ContactForm from '../../cmps/Contact/ContactForm'
+import ContactService from '../../service/ContactService'
 
 export default class ContactAdd extends Component {
 

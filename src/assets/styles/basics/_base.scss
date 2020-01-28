@@ -36,3 +36,20 @@ p {
     margin: 0 0 rem(12px);
     max-width: 60ch;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+    border: 3px dashed darkgray;
+    padding: 20px 50px;
+    margin-top: 40px;
+}
+
+input {
+        padding: 5px 5px 5px 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+}

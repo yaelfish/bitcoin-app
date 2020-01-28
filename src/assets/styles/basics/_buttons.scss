@@ -1,0 +1,19 @@
+button {
+    -webkit-appearance: none;
+    border: none;
+    background-color: $clr1;
+    color: white;
+    padding: 5px 22px;
+    margin-top: 10px;
+    font-weight: 700;
+    border-radius: 3px;
+    margin-left: 15px;
+    margin-bottom: 45px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $clr2;
+        color: $clr6;
+    }
+}
