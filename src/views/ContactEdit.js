@@ -24,7 +24,7 @@ export default class ContactEdit extends Component {
     }
 
     onEditContact = (edittedValue) => {
-        ContactService.editContact(this.state.contact, edittedValue)
+        ContactService.saveContact(this.state.contact, edittedValue)
             .then(() => { this.props.history.push(`/contact/${ this.state.contact._id }`)})
     }
 
