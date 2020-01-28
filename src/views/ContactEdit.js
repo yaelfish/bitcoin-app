@@ -11,27 +11,25 @@ export default class ContactEdit extends Component {
         this.loadContact();
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if(prevProps.match.params._id !== this.props.match.params._id){
-    //         this.loadContact();
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if(prevProps.match.params._id !== this.props.match.params._id){
+            this.loadContact();
+        }
+    }
 
     loadContact = () => {
         const {_id} = this.props.match.params;
         ContactService.getContactById(_id)
-        .then(toy => this.setState({ toy: toy }))
+        .then(contact => this.setState({ contact: contact }))
     }
 
-    onEditToy = (edittedValue) => {
-        // let {toy} = this.state;
-        // let { name, price, type, inStock } = this.props;
-        ContactService.editToy(this.state.toy, edittedValue)
-            .then(() => { this.props.history.push(`/toy/${ this.state.toy._id }`)})
+    onEditContact = (edittedValue) => {
+        ContactService.editContact(this.state.contact, edittedValue)
+            .then(() => { this.props.history.push(`/contact/${ this.state.contact._id }`)})
     }
 
     render() {
-        let {toy} = this.state; 
-        return <ContactForm toy={toy} onSave={this.onEditToy}></ContactForm>
+        let {contact} = this.state; 
+        return <ContactForm contact={contact} onSave={this.onEditContact}></ContactForm>
     }
 }
