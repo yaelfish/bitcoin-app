@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import ContactService from '../../service/ContactService';
 import ContactList from '../../cmps/Contact/ContactList';
 import ContactFilter from '../../cmps/Contact/ContactFilter';
+import { observer, inject } from 'mobx-react';
 
-export default class ContactPage extends Component {
 
+@inject('contactStore')
+
+@observer class ContactPage extends Component {
     state = {
         contacts: [],
         filterBy: {
@@ -17,22 +19,27 @@ export default class ContactPage extends Component {
     }
 
     loadContacts = () => {
-        ContactService.getContacts(this.state.filterBy)
-            .then(contacts => this.setState({ contacts }))
-            .catch((err) => this.props.history.push('/'));
+        try {
+            this.props.contactStore.loadContacts();
+        }
+        catch(err) {
+            console.log(err);
+            
+        }
     }
 
     onFilter = (filterBy) => {
-        this.setState({ filterBy }, this.loadContacts);
+        this.props.contactStore.setFilter(filterBy)
     }
 
     render() {
         return (
             <main className="container">
                 <h1>CONTACTS</h1>
-                <ContactFilter onFilter={this.onFilter} />
-                <ContactList contacts={this.state.contacts} />
+                <ContactFilter onFilter={this.props.contactStore.setFilter} />
+                <ContactList contacts={this.props.contactStore.contacts} />
             </main>
         )
     }
 }
+export default ContactPage;

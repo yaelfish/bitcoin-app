@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 export default class ContactForm extends Component {
     state = {
+        _id : '',
         name: '',
         email: '',
         phone: ''
@@ -21,6 +22,7 @@ export default class ContactForm extends Component {
         const { contact } = this.props;
         if (contact) {
             this.setState({ 
+                _id: contact._id,
                 name: contact.name, 
                 email: contact.email, 
                 phone: contact.phone
@@ -32,7 +34,7 @@ export default class ContactForm extends Component {
         ev.preventDefault();
         const edittedValue = {...this.state};
         this.props.onSave(edittedValue)
-        this.setState({ name: '', email: '', phone: '' })
+        this.setState({ name: '', email: '', phone: '', _id:'' })
     }
 
     onInputChange = (ev) => {

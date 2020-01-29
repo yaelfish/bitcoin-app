@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import ContactService from '../../service/ContactService';
+import { observer, inject } from 'mobx-react';
 
-export default class ContactDetails extends Component {
+@inject('contactStore')
 
-    state = {
-        contact: null
-    }
+@observer class ContactDetails extends Component {
 
     componentDidMount() {
         this.loadContact();
@@ -21,25 +20,23 @@ export default class ContactDetails extends Component {
 
     loadContact = () => {
         const {_id} = this.props.match.params;
-        ContactService.getContactById(_id).then(contact => {
-            this.setState({contact})
-        })
+        this.props.contactStore.getContactById(_id)
     }
 
     goBack = () => {
         this.props.history.push('/contact')
     }
 
-    onDelete = () => {
-        ContactService.deleteContact(this.state.contact._id).then(() => {
+    onDelete = async () => {
+        const { _id } = this.props.contactStore.currContact;
+        await this.props.contactStore.deleteContact(_id)
             this.props.history.push('/contact')
-        });
     }
 
 
     render() {
-        if (!this.state.contact) return <div className="loading">Loading...</div>
-        const { _id, name, email, phone } = this.state.contact;
+        
+        const { _id, name, email, phone } = this.props.contactStore.currContact;
         return (
             <div className="container card-contact">
             <p>{name}</p>
@@ -54,3 +51,5 @@ export default class ContactDetails extends Component {
         )
     }
 }
+
+export default ContactDetails;

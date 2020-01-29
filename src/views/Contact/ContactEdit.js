@@ -1,11 +1,19 @@
-import React, { Component } from 'react'
-import ContactForm from '../../cmps/Contact/ContactForm'
-import ContactService from '../../service/ContactService'
+import React, { Component } from 'react';
+import ContactForm from '../../cmps/Contact/ContactForm';
+import ContactService from '../../service/ContactService';
+import { observable, action } from 'mobx';
+import { observer, inject } from 'mobx-react';
 
-export default class ContactEdit extends Component {
-    state = {
-        contact: null
-    }
+@inject('contactStore')
+
+@observer class ContactEdit extends Component {
+    
+    @observable contact = null
+    @observable loading = true
+    
+    // state = {
+    //     contact: null
+    // }
 
     componentDidMount() {
         this.loadContact();
@@ -19,17 +27,17 @@ export default class ContactEdit extends Component {
 
     loadContact = () => {
         const {_id} = this.props.match.params;
-        ContactService.getContactById(_id)
-        .then(contact => this.setState({ contact: contact }))
+        this.props.contactStore.getContactById(_id);
     }
 
-    onEditContact = (edittedValue) => {
-        ContactService.saveContact(this.state.contact, edittedValue)
-            .then(() => { this.props.history.push(`/contact/${ this.state.contact._id }`)})
+    onEditContact = async (edittedValue) => {
+        await this.props.contactStore.editContact(edittedValue)
+        this.props.history.push(`/contact/${ this.props.contactStore.currContact._id }`)
     }
 
     render() {
-        let {contact} = this.state; 
-        return <ContactForm contact={contact} onSave={this.onEditContact}></ContactForm>
+        let {currContact} = this.props.contactStore; 
+        return <ContactForm contact={currContact} onSave={this.onEditContact}></ContactForm>
     }
 }
+export default ContactEdit;

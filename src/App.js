@@ -16,7 +16,6 @@ const history = createBrowserHistory();
 export default function App() {
   return (
     <div className="App">
-
       <Router history={history} >
         <NavBar />
         <Switch>
